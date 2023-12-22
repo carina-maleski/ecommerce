@@ -3,6 +3,9 @@ package ecommerce;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import ecommerce.model.ProdutoFisico;
+import ecommerce.model.ProdutoVirtual;
 import ecommerce.util.Cores; //3
 
 public class Menu {
@@ -12,6 +15,17 @@ public class Menu {
 		Scanner leia = new Scanner(System.in); // 1
 		int opcao;
 
+		
+		ProdutoFisico pf1 = new ProdutoFisico(1,5203, "Suporte de celular", 15.0f, 1, 300.0f);
+		ProdutoFisico pf2 = new ProdutoFisico(2,324, "Vaso de flor", 10.0f, 1, 300.0f);
+		ProdutoVirtual pv1 = new ProdutoVirtual(3, 1000, "Vale presente 100", 100.0f, 2, "Asdh100");
+		ProdutoVirtual pv2 = new ProdutoVirtual(4, 426, "Vale presente 150", 150.0f, 2, "Asdh150");
+
+		pf1.visualizar();
+		pf2.visualizar();
+		pv1.visualizar();
+		pv2.visualizar();
+		
 		while (true) { // 2
 			System.out.println(Cores.TEXT_CYAN + Cores.ANSI_BLACK_BACKGROUND);
 			System.out.println("*************************************************");
@@ -25,10 +39,9 @@ public class Menu {
 			System.out.println("*   3 - Buscar Produtos por Id                  *");
 			System.out.println("*   4 - Atualizar Dados do Produto              *");
 			System.out.println("*   5 - Apagar Produto                          *");
-			System.out.println("*   6 - Remover unidades do Produto do Estoque  *");
+			System.out.println("*   6 - Realizar uma Venda                      *");
 			System.out.println("*   7 - Reposição de Estoque                    *");
-			System.out.println("*   8 - Realizar uma venda                      *"); // transferência
-			System.out.println("*   9 - Sair                                    *");
+			System.out.println("*   8 - Sair                                    *");
 			System.out.println("*                                               *");
 			System.out.println("*************************************************");
 			System.out.println("                                                 ");
@@ -44,7 +57,7 @@ public class Menu {
 				opcao = 0;
 			}
 
-			if (opcao == 9) { // 5
+			if (opcao == 8) { // 5
 				System.out.println(Cores.TEXT_WHITE_BOLD + "\nNossa lojinha na Internet");
 				assinatura();
 				leia.close();
@@ -73,10 +86,6 @@ public class Menu {
 				keyPress();
 				break;
 			case 7:
-
-				keyPress();
-				break;
-			case 8:
 
 				keyPress();
 				break;
