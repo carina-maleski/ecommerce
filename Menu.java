@@ -51,7 +51,6 @@ public class Menu {
 				System.exit(0);
 			}
 	}
-
 }
 		public static void assinatura() { //6
 			System.out.println("\n*****************************************");
