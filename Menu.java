@@ -32,7 +32,7 @@ public class Menu {
 		pv2.visualizar();
 
 		while (true) { // 2
-			System.out.println(Cores.TEXT_CYAN + Cores.ANSI_BLACK_BACKGROUND);
+			System.out.println(Cores.TEXT_BLACK_BOLD+ Cores.ANSI_WHITE_BACKGROUND);
 			System.out.println("*************************************************");
 			System.out.println("*                                               *");
 			System.out.println("*         Nossa Lojinha na Internet             *");
@@ -97,7 +97,7 @@ public class Menu {
 							new ProdutoVirtual(produtos.gerarId(), quantidade, descricao, preco, tipo, codigoAcesso));
 				}
 				case 2 -> {
-					System.out.println("Digite o peso do Produto Físico: ");
+					System.out.println("Digite o peso do Produto Físico (g): ");
 					peso = leia.nextFloat();
 					produtos.cadastrar(new ProdutoFisico(produtos.gerarId(), quantidade, descricao, preco, tipo, peso));
 				}
@@ -105,23 +105,101 @@ public class Menu {
 				keyPress();
 				break;
 			case 2:
-				
-
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Listar todos os Produtos\n\n");
+				produtos.listarTodos();
 				keyPress();
 				break;
 			case 3:
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Buscar Produtos por Id\n\n");
 
+				System.out.println("Digite o id do Produto: ");
+				id = leia.nextInt();
+
+				produtos.procurarPorId(id);
 				keyPress();
 				break;
 			case 4:
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Atualizar Dados do Produto\n\n");
 
+				System.out.println("Digite o id do Produto: ");
+				id = leia.nextInt();
+
+				var buscaProduto = produtos.buscarNaCollection(id);
+
+				if (buscaProduto != null) {
+
+					tipo = buscaProduto.getTipo();
+
+					System.out.println("Digite a Descrição do Produto: ");
+					leia.skip("\\R?");
+					descricao = leia.nextLine();
+
+					System.out.println("Digite o Preço de venda do Produto: ");
+					preco = leia.nextFloat();
+
+					System.out.println("Digite a quantidade adicionada ao estoque: ");
+					quantidade = leia.nextInt();
+
+					switch (tipo) {
+					case 1 -> {
+						System.out.println("Digite o Código de Acesso do Produto Virtual: ");
+						leia.skip("\\R?");
+						codigoAcesso = leia.nextLine();
+						
+						produtos.atualizar(new ProdutoVirtual(id, quantidade, descricao, preco, tipo,
+								codigoAcesso));
+					}
+					case 2 -> {
+						System.out.println("Digite o peso do Produto Físico (g): ");
+						peso = leia.nextFloat();
+						produtos.atualizar(
+								new ProdutoFisico(id, quantidade, descricao, preco, tipo, peso));
+					}
+					default -> {
+						System.out.println("\nTipo de produto inválido!");
+					}
+					}
+				} else {
+					System.out.println("\nO Produto não foi encontrado!");
+				}
+
+				keyPress();
+				break;
+			case 5:
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Apagar Produto\n\n");
+
+				System.out.println("Digite o id do Produto: ");
+				id = leia.nextInt();
+
+				produtos.deletar(id);
 				keyPress();
 				break;
 			case 6:
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Realizar uma Venda\n\n");
 
+				System.out.println("Digite o id do Produto: ");
+				id = leia.nextInt();
+
+				do {
+					System.out.println("Digite a quantidade do Produto: ");
+					quantidade = leia.nextInt();
+				} while (quantidade <= 0);
+
+				produtos.realizarVenda(id, quantidade);
 				keyPress();
 				break;
 			case 7:
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Reposição de Estoque\n\n");
+
+				System.out.println("Digite o id do Produto: ");
+				id = leia.nextInt();
+				
+				do {
+					System.out.println("Digite a Quantidade que será adicionada ao Estoque (un): ");
+					quantidade = leia.nextInt();
+				} while (quantidade <= 0);
+
+				produtos.reporEstoque(id, quantidade);
 
 				keyPress();
 				break;

@@ -20,7 +20,7 @@ public class EcommerceController implements EcommerceRepository {
 	}
 
 	@Override
-	public void listarTodas() {
+	public void listarTodos() {
 		for (var produto : listaProduto) {
 			produto.visualizar();
 		}
@@ -44,7 +44,6 @@ public class EcommerceController implements EcommerceRepository {
 		} else {
 			System.out.println("\nO produto número: " + produto.getId() + " não foi encontrado!");
 		}
-
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class EcommerceController implements EcommerceRepository {
 		if (produto != null) {
 			if (produto.realizarVenda(quantidade) == true)
 				System.out.println("\nA venda de " + quantidade + " unidades do Produto " + produto.getDescricao()
-						+ " (id " + produto.getId() + ") foi efetuada com sucesso!");
+						+ " (id " + produto.getId() + ") foi efetuada com sucesso! Valor final: "+(produto.getPreco()*quantidade));
 		} else
 			System.out.println("\nO produto número: " + id + " não foi encontrado!");
 	}
